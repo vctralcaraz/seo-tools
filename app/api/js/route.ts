@@ -1,0 +1,16 @@
+import { NextResponse } from "next/server";
+
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const name = searchParams.get("name") || "null";
+  const scriptContent = `
+	console.log('Hello, ${name} from external script!');
+  `;
+  return new NextResponse(scriptContent, {
+    headers: {
+      "Content-Type": "application/javascript",
+      "Content-Disposition": 'inline; filename="script.js"',
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+}

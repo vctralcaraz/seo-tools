@@ -2,10 +2,14 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const id = searchParams.get("id") || "null";
+  const id = searchParams.get("id") || null;
+
   if (id) {
     console.log("id has been added:", id);
-    const scriptContent = `alert(${document.body});`;
+    const scriptContent = `
+      const body = document.body;
+      alert(body);
+    `;
 
     return new NextResponse(scriptContent, {
       headers: {
@@ -15,5 +19,6 @@ export async function GET(req: Request) {
     });
   } else {
     console.log("no id has been added");
+    return new NextResponse(`<h1>null</h1>`);
   }
 }

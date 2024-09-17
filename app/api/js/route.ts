@@ -8,7 +8,7 @@ export async function GET(req: Request) {
     console.log("id has been added:", id);
     const scriptContent = `
       const body = document.body.innerHTML;
-      alert(body);
+      console.log(body);
     `;
 
     return new NextResponse(scriptContent, {

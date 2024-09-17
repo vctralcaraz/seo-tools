@@ -7,7 +7,7 @@ export async function GET(req: Request) {
   if (id) {
     console.log("id has been added:", id);
     const scriptContent = `
-      const body = document.body;
+      const body = document.body.innerHTML;
       alert(body);
     `;
 

@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const name = searchParams.get("name") || "null";
-  const scriptContent = `alert('Hello, ${name} from external script!');`;
+  const scriptContent = `alert(${document.body});`;
 
   return new NextResponse(scriptContent, {
     headers: {

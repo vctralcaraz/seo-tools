@@ -7,7 +7,18 @@ export async function GET(req: Request) {
 
   return new NextResponse(scriptContent, {
     headers: {
-      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+    },
+  });
+}
+
+// Handle preflight (OPTIONS) requests for CORS
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    headers: {
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
     },

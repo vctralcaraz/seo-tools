@@ -22,6 +22,9 @@ export async function GET(req: Request) {
       headers: {
         "Content-Type": "application/javascript",
         "Cache-Control": "no-store, max-age=0",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
       },
     });
   } else {
@@ -53,6 +56,10 @@ export async function POST(req: Request) {
       JSON.stringify({ message: "Data received successfully" }),
       {
         status: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
       },
     );
   } catch (error) {

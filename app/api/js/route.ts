@@ -70,3 +70,15 @@ export async function POST(req: Request) {
     );
   }
 }
+//
+// Handle OPTIONS (preflight request)
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 204, // No Content
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
+  });
+}

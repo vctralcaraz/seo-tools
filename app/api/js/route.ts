@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id") || null;
-  const domain = req.url.split("api")[0];
+  const domain = req.url.split("/api")[0];
 
   if (id) {
     console.log("id has been added:", id);
@@ -17,7 +17,7 @@ export async function GET(req: Request) {
           "content": data,
           "url": url,
         }
-        const res = await fetch("${domain}api/js?id=${id}",{
+        const res = await fetch("${domain}/api/js?id=${id}",{
           method: "POST", 
           headers: {
             "Content-Type": "application/json",
@@ -54,8 +54,7 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const parsedData = JSON.parse(body);
-    console.log(parsedData);
+    console.log(body);
 
     return new Response(
       JSON.stringify({ message: "Data received successfully" }),

@@ -54,7 +54,8 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    console.log(body);
+    const parsedData = JSON.parse(body);
+    console.log(parsedData);
 
     return new Response(
       JSON.stringify({ message: "Data received successfully" }),

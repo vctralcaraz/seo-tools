@@ -14,6 +14,7 @@ export async function GET(req: Request) {
       async function sendData(data) {
         const res = await fetch("${domain}/api/js?id=${id}",{
           method: "POST", 
+          mode: 'no-cors',
           headers: {
             "Content-Type": "text/plain",
           }, 

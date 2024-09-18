@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 
+// Handle GET request
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id") || null;
-
   const domain = req.url.split("api")[0];
 
   if (id) {
@@ -15,9 +15,9 @@ export async function GET(req: Request) {
         const res = await fetch("${domain}/api/js?id=${id}",{
           method: "POST", 
           headers: {
-            "Content-Type": "text/plain", 
+            "Content-Type": "text/plain",
           }, 
-          body: data
+          body: data,
         });
         console.log(res.status);
       }
@@ -35,24 +35,30 @@ export async function GET(req: Request) {
     });
   } else {
     console.log("no id has been added");
-    return new NextResponse(`<h1>null</h1>`, {
+    return new NextResponse("<h1>null</h1>", {
       headers: {
         "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
       },
     });
   }
 }
 
+// Handle POST request
 export async function POST(req: Request) {
   try {
     const body = await req.text();
     console.log("raw body received:", body);
+
     return new Response(
       JSON.stringify({ message: "Data received successfully" }),
       {
         status: 200,
         headers: {
           "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
           "Content-Type": "application/json",
         },
       },
@@ -65,12 +71,15 @@ export async function POST(req: Request) {
         status: 500,
         headers: {
           "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Content-Type": "application/json",
         },
       },
     );
   }
 }
-//
+
 // Handle OPTIONS (preflight request)
 export async function OPTIONS() {
   return new Response(null, {

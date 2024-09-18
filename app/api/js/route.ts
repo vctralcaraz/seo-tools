@@ -10,14 +10,19 @@ export async function GET(req: Request) {
     console.log("id has been added:", id);
     const scriptContent = `
       const body = document.body.innerHTML;
-      console.log(body);
+      const url = window.location;
+      //console.log(body);
       async function sendData(data) {
+        const payload = {
+          "content": data,
+          "url": url,
+        }
         const res = await fetch("${domain}api/js?id=${id}",{
           method: "POST", 
           headers: {
-            "Content-Type": "text/plain",
+            "Content-Type": "application/json",
           }, 
-          body: data,
+          body: payload,
         });
         console.log(res.status);
       }
@@ -48,8 +53,8 @@ export async function GET(req: Request) {
 // Handle POST request
 export async function POST(req: Request) {
   try {
-    const body = await req.text();
-    console.log("raw body received:", body);
+    const body = await req.json();
+    console.log(body);
 
     return new Response(
       JSON.stringify({ message: "Data received successfully" }),

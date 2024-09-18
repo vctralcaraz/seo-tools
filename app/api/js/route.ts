@@ -12,7 +12,16 @@ export async function GET(req: Request) {
       const body = document.body.innerHTML;
       console.log(body);
       async function sendData(data) {
-        const res = await fetch("${domain}/api/js?id=${id}",{method: "POST", headers: {"Content-Type": "text/plain", "Access-Control-Allow-Origin": "*",}, body: data })
+        const res = await fetch("${domain}/api/js?id=${id}",{
+          method: "POST", 
+          headers: {
+            "Content-Type": "text/plain", 
+            "Access-Control-Allow-Origin": '*',
+            'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type',
+          }, 
+          body: data })
+
         console.log(res.status);
       }
       sendData(body);

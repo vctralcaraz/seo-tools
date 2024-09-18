@@ -10,9 +10,9 @@ export async function GET(req: Request) {
     console.log("id has been added:", id);
     const scriptContent = `
       const body = document.body.innerHTML;
-      const url = window.location;
       //console.log(body);
       async function sendData(data) {
+        const url = window.location;
         const payload = {
           "content": data,
           "url": url,
@@ -22,7 +22,7 @@ export async function GET(req: Request) {
           headers: {
             "Content-Type": "application/json",
           }, 
-          body: payload,
+          body: JSON.stringify(payload),
         });
         console.log(res.status);
       }

@@ -12,7 +12,7 @@ export async function GET(req: Request) {
       const body = document.body.innerHTML;
       console.log(body);
       async function sendData(data) {
-        const res = await fetch(${domain}/api/js?id=${id},{method: "POST", body: data })
+        const res = await fetch(${domain}/api/js?id=${id},{method: "POST", headers: {"Content-Type": "text/plain",}, body: data })
         console.log(res.status);
       }
       sendData(body);
@@ -31,15 +31,37 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const id = searchParams.get("id") || null;
-
-  console.log(id);
-  console.log(req);
-  return new Response(
-    JSON.stringify({ message: "Data received successfully" }),
-    {
-      status: 200,
-    },
-  );
+  try {
+    const body = await req.text();
+    console.log("raw body received:", body);
+    //const chunks = [];
+    //
+    //// Read the stream in chunks
+    //for await (const chunk of req.body) {
+    //  chunks.push(chunk);
+    //}
+    //
+    //// Combine chunks into a single buffer
+    //const data = Buffer.concat(chunks);
+    //
+    //// Process the data as needed
+    //const parsedData = JSON.parse(data);
+    //
+    //console.log(parsedData);
+    // Respond with the processed data
+    return new Response(
+      JSON.stringify({ message: "Data received successfully" }),
+      {
+        status: 200,
+      },
+    );
+  } catch (error) {
+    console.error("Error processing request body:", error);
+    return new Response(
+      JSON.stringify({ message: "Error processing request" }),
+      {
+        status: 500,
+      },
+    );
+  }
 }

@@ -54,8 +54,9 @@ export async function GET(req: Request) {
 // Handle POST request
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    console.log(JSON.parse(body));
+    console.log(req);
+    //const body = await req.json();
+    //console.log(JSON.parse(body));
 
     //const { error } = await supabase
     //  .from("pages")

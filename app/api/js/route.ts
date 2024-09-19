@@ -54,7 +54,7 @@ export async function GET(req: Request) {
 // Handle POST request
 export async function POST(req: Request) {
   try {
-    console.log(req);
+    console.log(req.text());
     //const body = await req.json();
     //console.log(JSON.parse(body));
 

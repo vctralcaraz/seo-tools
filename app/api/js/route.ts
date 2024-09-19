@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+//import supabase from "../../scripts/db";
 
 // Handle GET request
 export async function GET(req: Request) {
@@ -54,7 +55,13 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    console.log(body);
+    console.log(JSON.parse(body));
+
+    //const { error } = await supabase
+    //  .from("pages")
+    //  .insert({ url: body.url, content: body.content });
+    //
+    //if (error) console.log(error);
 
     return new Response(
       JSON.stringify({ message: "Data received successfully" }),
